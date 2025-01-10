@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>VISTA MEDIA | {{ $title }}</title>
+    <title>VISUAL MANDIRI | {{ $title }}</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/img/favicon.png" type="image/x-icon">
 </head>
 
 <body class="container bg-stone-700 mx-auto flex h-screen w-full position-relative">
@@ -19,7 +19,7 @@
             class="drop-shadow-lg m-auto sm:mt-5 w-20 h-20 sm:w-[90px] sm:h-[90px] flex position-relative bg-white rounded-full border">
             <div
                 class="drop-shadow-md m-auto w-[72px] h-[72px] sm:w-[82px] sm:h-[82px] rounded-full border items-center flex">
-                <img class="w-16 h-16 sm:w-[74px] sm:h-[74px]" src="/img/logo-vista-media.png" alt="">
+                <img class="w-16 h-16 sm:w-[74px] sm:h-[74px] m-auto" src="/img/visual-mandiri.png" alt="">
             </div>
         </div>
         <!-- Logo end-->

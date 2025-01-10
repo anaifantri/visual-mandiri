@@ -6,11 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>VISTA MEDIA | {{ $title }}</title>
+    <title>VISUAL MANDIRI | {{ $title }}</title>
     {{-- <link rel="stylesheet" href="../../../../../../../css/style.css"> --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/apexcharts.css') }}">
-    <link rel="icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -38,7 +38,8 @@
     @if (auth()->check())
         <div
             class="w-full fixed fixed-bottom bg-stone-900 items-center text-center bottom-0 z-50 p-1 drop-shadow-xl shadow-inner">
-            <h1 class="text-center text-white font-sans text-sm">&copy 2023 PT. Vista Media | www.vistamedia.co.id</h1>
+            <h1 class="text-center text-white font-sans text-sm">&copy 2025 CV. Visual Mandiri | www.visualmandiri.co.id
+            </h1>
         </div>
     @endif
     <!-- Footer end-->
