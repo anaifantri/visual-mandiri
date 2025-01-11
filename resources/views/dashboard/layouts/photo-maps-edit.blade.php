@@ -54,26 +54,28 @@
                 @endforeach
             </figure>
             <div class=" relative mt-2 lg-photo-product border ">
-                <div id="prevButton" class="absolute inset-y-0 left-0 w-7 h-12 m-auto">
-                    <button
-                        class="flex items-center justify-center rounded-r-lg w-7 h-12 bg-slate-200 bg-opacity-30 hover:bg-opacity-75 transition duration-500 ease-in-out cursor-pointer"
-                        type="button" onclick="buttonPrev()">
-                        <svg class="fill-white w-5" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
-                            clip-rule="evenodd" viewBox="0 0 24 24">
-                            <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
-                        </svg>
-                    </button>
-                </div>
-                <div id="nextButton" class="absolute inset-y-0 right-0 w-7 h-12 m-auto">
-                    <button type="button"
-                        class="flex items-center justify-center rounded-l-lg w-7 h-12 bg-slate-200 bg-opacity-30 hover:bg-opacity-75 transition duration-500 ease-in-out cursor-pointer"
-                        onclick="buttonNext()">
-                        <svg class="fill-white w-5" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
-                            clip-rule="evenodd" viewBox="0 0 24 24">
-                            <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z" />
-                        </svg>
-                    </button>
-                </div>
+                @if (count($location_photos) > 0)
+                    <div id="prevButton" class="absolute inset-y-0 left-0 w-7 h-12 m-auto">
+                        <button
+                            class="flex items-center justify-center rounded-r-lg w-7 h-12 bg-slate-200 bg-opacity-30 hover:bg-opacity-75 transition duration-500 ease-in-out cursor-pointer"
+                            type="button" onclick="buttonPrev()">
+                            <svg class="fill-white w-5" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                                clip-rule="evenodd" viewBox="0 0 24 24">
+                                <path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="nextButton" class="absolute inset-y-0 right-0 w-7 h-12 m-auto">
+                        <button type="button"
+                            class="flex items-center justify-center rounded-l-lg w-7 h-12 bg-slate-200 bg-opacity-30 hover:bg-opacity-75 transition duration-500 ease-in-out cursor-pointer"
+                            onclick="buttonNext()">
+                            <svg class="fill-white w-5" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd"
+                                clip-rule="evenodd" viewBox="0 0 24 24">
+                                <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z" />
+                            </svg>
+                        </button>
+                    </div>
+                @endif
                 @foreach ($location_photos as $photo)
                     <div id="{{ $photo->set_default }}" class="divImage" hidden>
                         <div class="absolute bottom-2 left-0 w-full h-14 bg-black bg-opacity-80 p-2">

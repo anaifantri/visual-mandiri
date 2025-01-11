@@ -10,11 +10,6 @@
             @include('sales-report.chart-header')
             <div id="chartReport" class="flex justify-center z-0">
                 <?php
-                // if (fmod(count($locations), 35) == 0) {
-                //     $pageQtyChart = count($locations) / 35;
-                // } else {
-                //     $pageQtyChart = (count($locations) - fmod(count($locations), 35)) / 35 + 1;
-                // }
                 if (request('yearReport')) {
                     $thisYear = request('yearReport');
                 } else {
@@ -68,25 +63,29 @@
                         @while ($addPages == true)
                             <div class="w-[1580px] h-[1120px] px-10 mt-2 p-4 bg-white z-0">
                                 <div class="flex items-center border rounded-lg p-4 mt-8">
-                                    <div class="w-28">
-                                        <img class="ml-2" src="/img/logo-vm.png" alt="">
+                                    <div class="w-44">
+                                        <img class="ml-2" src="{{ asset('storage/' . $company->logo) }}" alt="">
                                     </div>
-                                    <div class="w-[450px] ml-6">
+                                    <div class="w-[750px] ml-6">
                                         <div>
-                                            <span class="text-xs font-semibold">PT. Vista Media</span>
+                                            <span class="text-sm font-semibold">{{ $company->name }}</span>
                                         </div>
                                         <div>
-                                            <span class="text-[0.65rem]">Jl. Pulau Kawe No. 40 - Dauh Puri Kauh</span>
+                                            <span class="text-xs">{{ $company->address }}, {{ $company->village }},
+                                                {{ $company->district }}</span>
                                         </div>
                                         <div>
-                                            <span class="text-[0.65rem]">Kota Denpasar, Bali 80114</span>
+                                            <span class="text-xs">{{ $company->city }} - {{ $company->province }}
+                                                {{ $company->post_code }} | Indonesia</span>
                                         </div>
                                         <div>
-                                            <span class="text-[0.65rem]">Ph. +62 361 230000 | Fax. +62 361 237800 </span>
+                                            <span class="text-xs">Phone : {{ $company->phone }} | Mobile :
+                                                {{ $company->m_phone }}
+                                            </span>
                                         </div>
                                         <div>
-                                            <span class="text-[0.65rem]">e-mail : info@vistamedia.co.id |
-                                                www.vistamedia.co.id</span>
+                                            <span class="text-xs">e-mail : info@visualmandiri.co.id | Website :
+                                                www.visualmandiri.co.id</span>
                                         </div>
                                     </div>
                                     <div class="flex w-full justify-end">
@@ -268,7 +267,6 @@
                                                                     @else
                                                                         @include('sales-report.tr-merged-blank')
                                                                     @endif
-                                                                    {{-- @include('sales-report.tr-vt-client') --}}
                                                                 @endfor
                                                             @endforeach
                                                             @if ($usedSlot < $slots)
@@ -311,25 +309,29 @@
                     @else
                         <div class="w-[1580px] h-[1120px] px-10 mt-2 p-4 bg-white z-0">
                             <div class="flex items-center border rounded-lg p-4 mt-8">
-                                <div class="w-28">
-                                    <img class="ml-2" src="/img/logo-vm.png" alt="">
+                                <div class="w-44">
+                                    <img class="ml-2" src="{{ asset('storage/' . $company->logo) }}" alt="">
                                 </div>
-                                <div class="w-[450px] ml-6">
+                                <div class="w-[750px] ml-6">
                                     <div>
-                                        <span class="text-xs font-semibold">PT. Vista Media</span>
+                                        <span class="text-sm font-semibold">{{ $company->name }}</span>
                                     </div>
                                     <div>
-                                        <span class="text-[0.65rem]">Jl. Pulau Kawe No. 40 - Dauh Puri Kauh</span>
+                                        <span class="text-xs">{{ $company->address }}, {{ $company->village }},
+                                            {{ $company->district }}</span>
                                     </div>
                                     <div>
-                                        <span class="text-[0.65rem]">Kota Denpasar, Bali 80114</span>
+                                        <span class="text-xs">{{ $company->city }} - {{ $company->province }}
+                                            {{ $company->post_code }} | Indonesia</span>
                                     </div>
                                     <div>
-                                        <span class="text-[0.65rem]">Ph. +62 361 230000 | Fax. +62 361 237800 </span>
+                                        <span class="text-xs">Phone : {{ $company->phone }} | Mobile :
+                                            {{ $company->m_phone }}
+                                        </span>
                                     </div>
                                     <div>
-                                        <span class="text-[0.65rem]">e-mail : info@vistamedia.co.id |
-                                            www.vistamedia.co.id</span>
+                                        <span class="text-xs">e-mail : info@visualmandiri.co.id | Website :
+                                            www.visualmandiri.co.id</span>
                                     </div>
                                 </div>
                                 <div class="flex w-full justify-end">

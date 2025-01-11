@@ -36,7 +36,7 @@ class LocationPhotoController extends Controller
             if($request->add_default == "Yes"){
                 $set_default = true;
                 $validateData['set_default'] = false;
-                $setDefaultUpdate = LocationPhoto::where('id', $request->location_id)->update($validateData);
+                $setDefaultUpdate = LocationPhoto::where('id', $request->location_id)->where('company_id', $request->company_id)->update($validateData);
             } else {
                 $set_default = false;
             }

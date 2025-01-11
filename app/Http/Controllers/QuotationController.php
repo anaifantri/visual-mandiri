@@ -41,16 +41,16 @@ class QuotationController extends Controller
         //
     }
 
-    public function home(String $category, Request $request): View
+    public function home(String $category, String $company_id, Request $request): View
     {
         if(Gate::allows('isQuotation') && Gate::allows('isMarketingRead')){
             if($category == "All"){
                 $dataCategory = MediaCategory::where('id', $request->media_category_id)->get()->last();
-                $dataQuotations = Quotation::filter(request('search'))->todays()->weekday()->monthly()->annual()->year()->month()->sortable()->category()->orderBy("number", "desc")->paginate(15)->withQueryString();
+                $dataQuotations = Quotation::where('company_id', $company_id)->filter(request('search'))->todays()->weekday()->monthly()->annual()->year()->month()->sortable()->category()->orderBy("number", "desc")->paginate(30)->withQueryString();
             }else{
                 $dataCategory = MediaCategory::where('name', $category)->get()->last();
                 $media_category_id = $dataCategory->id;
-                $dataQuotations = Quotation::where('media_category_id', $dataCategory->id)->filter(request('search'))->todays()->weekday()->monthly()->annual()->year()->month()->orderBy("number", "desc")->sortable()->paginate(15)->withQueryString();
+                $dataQuotations = Quotation::where('company_id', $company_id)->where('media_category_id', $dataCategory->id)->filter(request('search'))->todays()->weekday()->monthly()->annual()->year()->month()->orderBy("number", "desc")->sortable()->paginate(30)->withQueryString();
             }
     
             $media_categories = MediaCategory::with('quotations')->get();
@@ -99,7 +99,7 @@ class QuotationController extends Controller
         }
     }
 
-    public function selectLocation(String $category, Request $request): View
+    public function selectLocation(String $category, String $company_id, Request $request): View
     {
         if((Gate::allows('isAdmin') && Gate::allows('isQuotation') && Gate::allows('isMarketingCreate')) || (Gate::allows('isMarketing') && Gate::allows('isQuotation') && Gate::allows('isMarketingCreate'))){
             $sales = collect([]);
@@ -114,7 +114,7 @@ class QuotationController extends Controller
                     if($request->serviceType == "new"){
                         $dataLocations = Location::filter(request('search'))->area()->city()->category()->print()->sortable()->orderBy("code", "asc")->get();
                     }else if($request->serviceType == "existing"){
-                        $dataSales = Sale::filter(request('search'))->service()->area()->city()->category()->sortable()->get();
+                        $dataSales = Sale::where('company_id', $company_id)->filter(request('search'))->service()->area()->city()->category()->sortable()->get();
                         // $sales = $dataSales;
                         foreach ($dataSales as $sale) {
                             $product = json_decode($sale->product);
@@ -146,7 +146,7 @@ class QuotationController extends Controller
                         }
                     }
                 }else{
-                    $dataSales = Sale::filter(request('search'))->service()->area()->city()->category()->sortable()->get();
+                    $dataSales = Sale::where('company_id', $company_id)->filter(request('search'))->service()->area()->city()->category()->sortable()->get();
                     // $sales = $dataSales;
                     foreach ($dataSales as $sale) {
                         $product = json_decode($sale->product);
@@ -182,7 +182,7 @@ class QuotationController extends Controller
                     if($request->quotationType == "new"){
                         $dataLocations = Location::quotationNew()->categoryName($category)->filter(request('search'))->area()->city()->type()->sortable()->orderBy("code", "asc")->get();
                     }else if($request->quotationType == "extend"){
-                        $dataLocations = Location::categoryName($category)->quotationExtend()->filter(request('search'))->area()->city()->type()->sortable()->orderBy("code", "asc")->get();
+                        $dataLocations = Location::where('company_id', $company_id)->categoryName($category)->quotationExtend()->filter(request('search'))->area()->city()->type()->sortable()->orderBy("code", "asc")->get();
                         foreach ($dataLocations as $location) {
                             $salesData = $location->active_sale;
                             $sales->push($salesData);
@@ -195,7 +195,6 @@ class QuotationController extends Controller
             }
             $media_categories = MediaCategory::with('locations')->get();
             $media_sizes = MediaSize::with('locations')->get();
-            // $sales = Sale::with('location')->get();
             $quotations = Quotation::with('sales')->get();
             return view ('quotations.select-location', [
                 'areas' => Area::all(),
@@ -239,12 +238,10 @@ class QuotationController extends Controller
             $printing_products = PrintingProduct::with('printing_prices')->get();
             $quotations = Quotation::with('sales')->get();
             $quotation_revisions = QuotationRevision::with('quotation')->get();
-            $company = Company::where('name', 'PT. Vista Media')->get()->last();
             return response()-> view ('quotations.create', [
                 'locations'=>$dataQuotations,
                 'extend_location' => $extendLocation,
                 'quotation_type'=>$type,
-                'company'=>$company,
                 'clients'=>Client::orderBy("name", "asc")->get(),
                 'client_groups'=>ClientGroup::orderBy("group", "asc")->get(),
                 'contacts'=>Contact::orderBy("name", "asc")->get(),
@@ -255,7 +252,7 @@ class QuotationController extends Controller
                 'city'=>$city,
                 'category'=>$category,
                 'data_category' => $mediaCategory,
-                'location_photos' => LocationPhoto::whereIn('location_id', $dataId)->where('set_default', true)->get(),
+                'data_photos' => LocationPhoto::whereIn('location_id', $dataId)->where('set_default', true)->get(),
                 'title' => 'Membuat Penawaran'.$category,
                 compact('sales', 'quotations', 'quotation_revisions','printing_products')
             ]);
@@ -279,6 +276,7 @@ class QuotationController extends Controller
     {
         if((Gate::allows('isAdmin') && Gate::allows('isQuotation') && Gate::allows('isMarketingCreate')) || (Gate::allows('isMarketing') && Gate::allows('isQuotation') && Gate::allows('isMarketingCreate'))){
             $romawi = [1 => 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VII', 'IX', 'X', 'XI', 'XII'];
+            $dataCompany = Company::where('id', $request->company_id)->firstOrFail();
             // Set number --> start
             $lastQuotation = Quotation::where('company_id', $request->company_id)->whereYear('created_at', Carbon::now()->year)->get()->last();
             if($lastQuotation){
@@ -289,13 +287,13 @@ class QuotationController extends Controller
             }
             
             if($newNumber > 0 && $newNumber < 10){
-                $number = '000'.$newNumber.'/SPH/VM/'.$romawi[(int) date('m')].'-'. date('Y');
+                $number = '000'.$newNumber.'/SPH/'.$dataCompany->code.'/'.$romawi[(int) date('m')].'-'. date('Y');
             }else if($newNumber >= 10 && $newNumber < 100 ){
-                $number = '00'.$newNumber.'/SPH/VM/'.$romawi[(int) date('m')].'-'. date('Y');
+                $number = '00'.$newNumber.'/SPH/'.$dataCompany->code.'/'.$romawi[(int) date('m')].'-'. date('Y');
             }else if($newNumber >= 100 && $newNumber < 1000 ){
-                $number = '0'.$newNumber.'/SPH/VM/'.$romawi[(int) date('m')].'-'. date('Y');
+                $number = '0'.$newNumber.'/SPH/'.$dataCompany->code.'/'.$romawi[(int) date('m')].'-'. date('Y');
             } else {
-                $number = $newNumber.'/SPH/VM/'.$romawi[(int) date('m')].'-'. date('Y');
+                $number = $newNumber.'/SPH/'.$dataCompany->code.'/'.$romawi[(int) date('m')].'-'. date('Y');
             }
             // Set number --> end
             $request->request->add(['number' => $number]);

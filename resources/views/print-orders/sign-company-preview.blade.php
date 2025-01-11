@@ -13,7 +13,7 @@
                     @endif
                 </tr>
                 <tr>
-                    <th class="text-black font-semibold text-sm border">PT. Vista Media,</th>
+                    <th class="text-black font-semibold text-sm border">{{ $company->name }},</th>
                     <th class="text-black font-semibold text-sm border">{{ $product->vendor_company }}</th>
                     <th class="text-black text-sm font-semibold border">Kode : {{ $product->location_code }} -
                         {{ $product->city_code }}</th>
@@ -31,14 +31,14 @@
                     <td class="text-black text-sm border text-center">
                         <div class="flex w-full justify-center items-center">
                             <div>
-                                {{ QrCode::size(75)->generate('https://vistamedia.co.id/media/locations/' . $product->location_id) }}
+                                {{ QrCode::size(75)->generate('https://visualmandiri.co.id/media/locations/' . $product->location_id) }}
                             </div>
                         </div>
                     </td>
                     @if ($print_order->sale_id)
                         <td class="text-black text-sm border align-middle text-center">
                             <div class="flex w-full justify-center items-center">
-                                {{ QrCode::size(75)->generate('https://vistamedia.co.id/marketing/sales/' . $print_order->sale->id) }}
+                                {{ QrCode::size(75)->generate('https://visualmandiri.co.id/marketing/sales/' . $print_order->sale->id) }}
                             </div>
                         </td>
                     @else
@@ -50,6 +50,6 @@
     </div>
 </div>
 <div class="text-slate-500 text-xs ml-20">
-    <i>* Lembar untuk PT. Vista Media</i>
+    <i>* Lembar untuk {{ $company->name }}</i>
 </div>
 <!-- sign area end -->

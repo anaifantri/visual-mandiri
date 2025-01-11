@@ -31,7 +31,7 @@
                 </button>
                 @if (auth()->check())
                     <a class="flex justify-center items-center mx-1 btn-danger"
-                        href="/marketing/quotations/home/{{ $category }}">
+                        href="/marketing/quotations/home/{{ $category }}/{{ $company->id }}">
                         <svg class="fill-white w-4 m-auto hover:fill-red-600" xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24">
                             <path
@@ -222,8 +222,8 @@
                                 <div class="flex justify-center">
                                     <div class="flex w-[725px]">
                                         <div class="mt-2">
-                                            <label class="ml-1 text-sm text-black flex font-semibold">PT. Vista
-                                                Media</label>
+                                            <label
+                                                class="ml-1 text-sm text-black flex font-semibold">{{ $company->name }}</label>
                                             <label
                                                 class="ml-1 mt-10 text-sm text-black flex font-semibold"><u>{{ $created_by->name }}</u></label>
                                             <label class="flex ml-1 text-xs text-black">{{ $created_by->position }}</label>
@@ -231,7 +231,7 @@
                                                 {{ $created_by->phone }}</label>
                                         </div>
                                         <div class="flex ml-4 mt-2">
-                                            {{ QrCode::size(100)->generate('http://vistamedia.co.id/quotations/preview/' . $category . '/' . Crypt::encrypt($quotation->id)) }}
+                                            {{ QrCode::size(100)->generate('http://visualmandiri.co.id/quotations/preview/' . $category . '/' . Crypt::encrypt($quotation->id)) }}
                                         </div>
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@
                                 for ($i = 0; $i < count($description->lat); $i++) {
                                     $mapsMarkers =
                                         $mapsMarkers .
-                                        '&markers=icon:https://vistamedia.co.id/img/marker-red.png%7C' .
+                                        '&markers=icon:https://visualmandiri.co.id/img/marker-red.png%7C' .
                                         $description->lat[$i] .
                                         ',' .
                                         $description->lng[$i];
@@ -274,7 +274,7 @@
                                     $description->lat .
                                     ',' .
                                     $description->lng .
-                                    '&zoom=16&size=480x355&maptype=terrain&markers=icon:https://vistamedia.co.id/img/marker-red.png%7C' .
+                                    '&zoom=16&size=480x355&maptype=terrain&markers=icon:https://visualmandiri.co.id/img/marker-red.png%7C' .
                                     $description->lat .
                                     ',' .
                                     $description->lng .
@@ -379,7 +379,7 @@
                                                             class="w-[100px] text-xs font-mono font-thin text-teal-900 ml-2">Kawasan
                                                         </span>
                                                         <span class="w-[100px] flex mt-[40px] ml-2">
-                                                            {{ QrCode::size(100)->generate('https://vistamedia.co.id/locations/guest-preview/' . $category . '/' . Crypt::encrypt($product->id)) }}
+                                                            {{ QrCode::size(100)->generate('https://visualmandiri.co.id/locations/guest-preview/' . $category . '/' . Crypt::encrypt($product->id)) }}
                                                         </span>
                                                     </div>
                                                     <span class="flex w-[120px] text-xs font-mono font-thin text-teal-900">

@@ -49,7 +49,7 @@
 
         foreach ($products as $product) {
             $objSales = new stdClass();
-            $objSales->company_id = $quotation->company_id;
+            // $objSales->company_id = $quotation->company_id;
             $objSales->media_category_id = $quotation->media_category_id;
             $objSales->quotation_id = $quotation->id;
             $objSales->location_id = $product->id;
@@ -101,6 +101,7 @@
         <input type="text" id="agreement_number" name="agreement_number" hidden>
         <input type="date" id="order_date" name="order_date" hidden>
         <input type="text" id="order_number" name="order_number" hidden>
+        <input type="text" name="company_id" value="{{ $company->id }}" hidden>
         <div class="flex justify-center pl-14 py-10 bg-stone-800">
             <div class="z-0 mb-8 bg-stone-700 p-2 border rounded-md">
                 <div class="flex w-full justify-center">
@@ -115,7 +116,7 @@
                             <span class="mx-1">Save</span>
                         </button>
                         <a class="flex justify-center items-center mx-1 btn-danger"
-                            href="/marketing/sales/select-quotation/{{ $category }}">
+                            href="/marketing/sales/select-quotation/{{ $category }}/{{ $company->id }}">
                             <svg class="fill-current w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                 viewBox="0 0 24 24">
                                 <path
@@ -428,10 +429,6 @@
         <input type="text" id="salesData" name="salesData" value="{{ json_encode($salesData) }}" hidden>
         <!-- Create Sales end -->
     </form>
-
-    <!-- Create Sales preview start -->
-    {{-- @include('sales.create-preview') --}}
-    <!-- Create Sales preview end -->
 
     <!-- Modal Add / View Document start -->
     @include('dashboard.layouts.modal-add-document')

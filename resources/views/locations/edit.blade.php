@@ -8,6 +8,7 @@
         $modified_by->id = auth()->user()->id;
         $modified_by->name = auth()->user()->name;
         $modified_by->position = auth()->user()->position;
+        $location_photos = $data_photos->where('company_id', $company->id);
         $bulan = [
             1 => 'Januari',
             'Februari',
@@ -115,7 +116,7 @@
                     <form action="/media/location-photos" method="post" enctype="multipart/form-data">
                         @csrf
                         <input name="location_id" type="text" value="{{ $location->id }}" hidden>
-                        <input name="company_id" type="text" value="{{ $location->company->id }}" hidden>
+                        <input name="company_id" type="text" value="{{ $company->id }}" hidden>
                         <input name="media_category_id" type="text" value="{{ $location->media_category->id }}" hidden>
                         <input name="location_code" type="text" value="{{ $location->code }}" hidden>
                         <div>

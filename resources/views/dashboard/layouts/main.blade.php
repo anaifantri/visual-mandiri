@@ -7,10 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>VISUAL MANDIRI | {{ $title }}</title>
-    {{-- <link rel="stylesheet" href="../../../../../../../css/style.css"> --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/apexcharts.css') }}">
-    <link rel="icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 </head>
 
 <body>

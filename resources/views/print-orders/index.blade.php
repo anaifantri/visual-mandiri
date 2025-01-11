@@ -38,7 +38,7 @@
                             @canany(['isAdmin', 'isMarketing'])
                                 @can('isOrder')
                                     @can('isMarketingCreate')
-                                        <a href="/print-orders/select-locations" class="index-link btn-primary">
+                                        <a href="/print-orders/select-locations/{{ $company->id }}" class="index-link btn-primary">
                                             <svg class="fill-current w-5" clip-rule="evenodd" fill-rule="evenodd"
                                                 stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24"
                                                 xmlns="http://www.w3.org/2000/svg">
@@ -53,7 +53,7 @@
                             @endcanany
                         </div>
                     </div>
-                    <form class="flex mt-2" action="/marketing/print-orders">
+                    <form class="flex mt-2" action="/print-orders/{{ $company->id }}">
                         @if (request('todays'))
                             <input type="text" name="todays" value="{{ request('todays') }}" hidden>
                         @endif

@@ -3,6 +3,12 @@
 @section('container')
     <?php
     $dataProducts = [];
+    $location_photos = [];
+    foreach ($data_photos as $photo) {
+        if ($photo->company_id == $company->id) {
+            array_push($location_photos, $photo->photo);
+        }
+    }
     if ($quotation_type == 'new') {
         $i = 0;
         foreach ($locations as $location) {
@@ -14,7 +20,11 @@
             $dataProduct->city = $location->city->city;
             $dataProduct->city_code = $location->city->code;
             $dataProduct->address = $location->address;
-            $dataProduct->photo = $location_photos[$i]->photo;
+            if (count($location_photos) > 0) {
+                $dataProduct->photo = $location_photos[$i];
+            } else {
+                $dataProduct->photo = '';
+            }
             $dataProduct->description = $location->description;
             $dataProduct->size = $location->media_size->size;
             $dataProduct->width = $location->media_size->width;
@@ -156,7 +166,7 @@
                                 @endcan
                             @endcanany
                             <a class="flex justify-center items-center ml-1 btn-danger"
-                                href="/marketing/quotations/select-location/{{ $category }}">
+                                href="/marketing/quotations/select-location/{{ $category }}/{{ $company->id }}">
                                 <svg class="fill-current w-4 xl:w-5 2xl:w-6 ml-1 xl:mx-2" xmlns="http://www.w3.org/2000/svg"
                                     width="24" height="24" viewBox="0 0 24 24">
                                     <path
@@ -204,11 +214,8 @@
             </div>
         </div>
     </form>
-
-    <!-- Modal Preview start -->
-    {{-- @include('quotations.create-preview') --}}
-    <!-- Modal Preview end -->
     <!-- Quotation end -->
+
     <script src="/js/createquotation.js"></script>
     @if ($category == 'Service')
         <script src="/js/servicetable.js"></script>

@@ -39,7 +39,7 @@
                     {{ substr($quotation->number, 0, 4) }}</h1>
                 <div class="flex justify-end p-1 w-full">
                     <a class="flex justify-center items-center mx-1 btn-success"
-                        href="/marketing/quotations/home/{{ $quotation->media_category->name }}">
+                        href="/marketing/quotations/home/{{ $quotation->media_category->name }}/{{ $company->id }}">
                         <svg class="fill-current w-5" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round"
                             stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -491,8 +491,8 @@
                                     <div class="flex justify-center">
                                         <div class="flex w-[725px]">
                                             <div class="mt-2">
-                                                <label class="ml-1 text-sm text-black flex font-semibold">PT. Vista
-                                                    Media</label>
+                                                <label
+                                                    class="ml-1 text-sm text-black flex font-semibold">{{ $company->name }}</label>
                                                 <label
                                                     class="ml-1 mt-10 text-sm text-black flex font-semibold"><u>{{ $created_by->name }}</u></label>
                                                 <label
@@ -501,7 +501,7 @@
                                                     {{ $created_by->phone }}</label>
                                             </div>
                                             <div class="flex ml-4 mt-2">
-                                                {{ QrCode::size(100)->generate('http://vistamedia.co.id/quotations/preview/' . $category . '/' . Crypt::encrypt($quotation->id)) }}
+                                                {{ QrCode::size(100)->generate('http://visualmandiri.co.id/quotations/preview/' . $category . '/' . Crypt::encrypt($quotation->id)) }}
                                             </div>
                                         </div>
                                     </div>
@@ -532,7 +532,7 @@
                                     for ($i = 0; $i < count($description->lat); $i++) {
                                         $mapsMarkers =
                                             $mapsMarkers .
-                                            '&markers=icon:https://vistamedia.co.id/img/marker-red.png%7C' .
+                                            '&markers=icon:https://visualmandiri.co.id/img/marker-red.png%7C' .
                                             $description->lat[$i] .
                                             ',' .
                                             $description->lng[$i];
@@ -544,7 +544,7 @@
                                         $description->lat .
                                         ',' .
                                         $description->lng .
-                                        '&zoom=16&size=480x355&maptype=terrain&markers=icon:https://vistamedia.co.id/img/marker-red.png%7C' .
+                                        '&zoom=16&size=480x355&maptype=terrain&markers=icon:https://visualmandiri.co.id/img/marker-red.png%7C' .
                                         $description->lat .
                                         ',' .
                                         $description->lng .
@@ -653,7 +653,7 @@
                                                                 class="w-[100px] text-xs font-mono font-thin text-teal-900 ml-2">Kawasan
                                                             </span>
                                                             <span class="w-[100px] flex mt-[40px] ml-2">
-                                                                {{ QrCode::size(100)->generate('https://vistamedia.co.id/locations/guest-preview/' . $category . '/' . Crypt::encrypt($product->id)) }}
+                                                                {{ QrCode::size(100)->generate('https://visualmandiri.co.id/locations/guest-preview/' . $category . '/' . Crypt::encrypt($product->id)) }}
                                                             </span>
                                                         </div>
                                                         <span

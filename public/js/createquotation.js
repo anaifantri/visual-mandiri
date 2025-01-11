@@ -89,12 +89,6 @@ function selectClientAction(e){
 }
 
 if(quotationType.value == "new"){
-    // if (quotationType.value == "existing") {
-    //     clientType = document.getElementById("client_type").value;
-    //     if(clientType == "Perusahaan"){
-    //         companyClient  = JSON.parse(document.getElementById("clients").value);
-    //     }
-    // }
     var mainWrapper = document.getElementById("main-wrapper");
     var mainHeader = document.getElementById("main-header");
     
@@ -421,17 +415,6 @@ submitAction = () =>{
             }
         }
     }else if(quotationType.value == "extend"){
-        // if(category.value == "Service"){
-        //     if(printProductCheck() == false || installPriceCheck() == false){
-        //         alert("Silahkan lengkapi harga yang belum diinput..!!")
-        //     }else{
-        //         fillServiceData();
-        //         getNotes();
-        //         getPayments();
-        //         fillData();
-        //         formCreate.submit();
-        //     }
-        // }else 
         if (paymentCheck() == true) {
             getNotes();
             getPayments();

@@ -113,7 +113,8 @@
                         @can('isQuotation')
                             @can('isMarketingCreate')
                                 <div>
-                                    <a href="/marketing/quotations/select-location/{{ $category }}" class="index-link btn-primary">
+                                    <a href="/marketing/quotations/select-location/{{ $category }}/{{ $company->id }}"
+                                        class="index-link btn-primary">
                                         <svg class="fill-current w-5" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round"
                                             stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path
@@ -129,7 +130,7 @@
                 @endif
             </div>
             <div>
-                <form action="/marketing/quotations/home/{{ $category }}">
+                <form action="/marketing/quotations/home/{{ $category }}/{{ $company->id }}">
                     @if (request('todays'))
                         <input type="text" name="todays" value="{{ request('todays') }}" hidden>
                     @endif

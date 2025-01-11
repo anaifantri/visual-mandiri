@@ -255,7 +255,7 @@
                                 for ($i = 0; $i < count($description->lat); $i++) {
                                     $mapsMarkers =
                                         $mapsMarkers .
-                                        '&markers=icon:https://vistamedia.co.id/img/marker-red.png%7C' .
+                                        '&markers=icon:https://visualmandiri.co.id/img/marker-red.png%7C' .
                                         $description->lat[$i] .
                                         ',' .
                                         $description->lng[$i];
@@ -267,7 +267,7 @@
                                     $description->lat .
                                     ',' .
                                     $description->lng .
-                                    '&zoom=16&size=480x355&maptype=terrain&markers=icon:https://vistamedia.co.id/img/marker-red.png%7C' .
+                                    '&zoom=16&size=480x355&maptype=terrain&markers=icon:https://visualmandiri.co.id/img/marker-red.png%7C' .
                                     $description->lat .
                                     ',' .
                                     $description->lng .
@@ -372,7 +372,7 @@
                                                             class="w-[100px] text-xs font-mono font-thin text-teal-900 ml-2">Kawasan
                                                         </span>
                                                         <span class="w-[100px] flex mt-[40px] ml-2">
-                                                            {{ QrCode::size(100)->generate('https://vistamedia.co.id/locations/guest-preview/' . $category . '/' . Crypt::encrypt($product->id)) }}
+                                                            {{ QrCode::size(100)->generate('https://visualmandiri.co.id/locations/guest-preview/' . $category . '/' . Crypt::encrypt($product->id)) }}
                                                         </span>
                                                     </div>
                                                     <span class="flex w-[120px] text-xs font-mono font-thin text-teal-900">
@@ -402,10 +402,6 @@
             </div>
         </div>
     </form>
-
-    <!-- Modal Preview start -->
-    @include('quotation-revisions.create-preview')
-    <!-- Modal Preview end -->
 
     <!-- Quotation Revision end -->
     <script src="/js/createquotrevision.js"></script>

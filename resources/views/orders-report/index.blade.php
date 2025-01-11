@@ -14,13 +14,13 @@
                             <label class="text-lg text-stone-800 font-bold">Data SPK Cetak</label>
                         </div>
                         <div class="grid grid-cols-3 gap-2 w-[500px] p-2">
-                            <a href="/marketing/orders-report/print-orders"
+                            <a href="/marketing/orders-report/print-orders/{{ $company->id }}"
                                 class="flex col-span-3 justify-center text-teal-400 items-center h-[60px] bg-stone-900 hover:bg-stone-700 border rounded-lg shadow-lg cursor-pointer">
                                 <div>
                                     <label class="flex justify-center font-serif text-md cursor-pointer">SPK Cetak</label>
                                 </div>
                             </a>
-                            <a href="/print-orders/print-sales"
+                            <a href="/print-orders/print-sales/{{ $company->id }}"
                                 class="flex justify-center text-teal-400 items-center bg-stone-900 hover:bg-stone-700 border rounded-lg shadow-lg cursor-pointer p-2">
                                 <div>
                                     <label
@@ -29,7 +29,7 @@
                                         class="flex justify-center items-center font-serif text-md cursor-pointer">Berbayar</label>
                                 </div>
                             </a>
-                            <a href="/print-orders/free-sales"
+                            <a href="/print-orders/free-sales/{{ $company->id }}"
                                 class="flex justify-center text-teal-400 items-center bg-stone-900 hover:bg-stone-700 border rounded-lg shadow-lg cursor-pointer p-2">
                                 <div>
                                     <label
@@ -38,7 +38,7 @@
                                         class="flex justify-center items-center font-serif text-md cursor-pointer">Penjualan</label>
                                 </div>
                             </a>
-                            <a href="/print-orders/free-other"
+                            <a href="/print-orders/free-other/{{ $company->id }}"
                                 class="flex justify-center text-teal-400 items-center bg-stone-900 hover:bg-stone-700 border rounded-lg shadow-lg cursor-pointer p-2">
                                 <div>
                                     <label
@@ -130,13 +130,13 @@
                             <label class="text-lg text-stone-800 font-bold">Data SPK Pasang</label>
                         </div>
                         <div class="grid grid-cols-3 gap-2 w-[500px] p-2">
-                            <a href="/marketing/orders-report/install-orders"
+                            <a href="/marketing/orders-report/install-orders/{{ $company->id }}"
                                 class="flex col-span-3 justify-center text-teal-400 items-center h-[60px] bg-stone-900 hover:bg-stone-700 border rounded-lg shadow-lg cursor-pointer">
                                 <div>
                                     <label class="flex justify-center font-serif text-md cursor-pointer">SPK Pasang</label>
                                 </div>
                             </a>
-                            <a href="/install-orders/install-sales"
+                            <a href="/install-orders/install-sales/{{ $company->id }}"
                                 class="flex justify-center text-teal-400 items-center bg-stone-900 hover:bg-stone-700 border rounded-lg shadow-lg cursor-pointer p-2">
                                 <div>
                                     <label
@@ -145,7 +145,7 @@
                                         class="flex justify-center items-center font-serif text-md cursor-pointer">Berbayar</label>
                                 </div>
                             </a>
-                            <a href="/install-orders/free-sales"
+                            <a href="/install-orders/free-sales/{{ $company->id }}"
                                 class="flex justify-center text-teal-400 items-center bg-stone-900 hover:bg-stone-700 border rounded-lg shadow-lg cursor-pointer p-2">
                                 <div>
                                     <label
@@ -154,7 +154,7 @@
                                         Penjualan</label>
                                 </div>
                             </a>
-                            <a href="/install-orders/free-other"
+                            <a href="/install-orders/free-other/{{ $company->id }}"
                                 class="flex justify-center text-teal-400 items-center bg-stone-900 hover:bg-stone-700 border rounded-lg shadow-lg cursor-pointer p-2">
                                 <div>
                                     <label

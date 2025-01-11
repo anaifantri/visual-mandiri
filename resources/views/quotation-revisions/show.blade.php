@@ -27,9 +27,6 @@
     @else
         <input type="text" id="category" value="{{ $category }}" hidden>
     @endif
-    {{-- @if ($quotation_revision->quotation->media_category->name == 'Signage')
-        <input type="text" id="type" value="{{ $dataDescription->type }}" hidden>
-    @endif --}}
     <div class="flex justify-center pl-14 py-10 bg-stone-800">
         <div class="z-0 mb-8 bg-stone-700 p-4 border rounded-md">
             <!-- Title Show Quotation Revision start -->
@@ -451,7 +448,7 @@
                                                     {{ $modified_by->phone }}</label>
                                             </div>
                                             <div class="flex ml-4 mt-2">
-                                                {{ QrCode::size(100)->generate('http://vistamedia.co.id/quotation-revisions/preview/' . $category . '/' . Crypt::encrypt($quotation_revision->id)) }}
+                                                {{ QrCode::size(100)->generate('http://visualmandiri.co.id/quotation-revisions/preview/' . $category . '/' . Crypt::encrypt($quotation_revision->id)) }}
                                             </div>
                                         </div>
                                     </div>
@@ -482,7 +479,7 @@
                                     for ($i = 0; $i < count($description->lat); $i++) {
                                         $mapsMarkers =
                                             $mapsMarkers .
-                                            '&markers=icon:https://vistamedia.co.id/img/marker-red.png%7C' .
+                                            '&markers=icon:https://visualmandiri.co.id/img/marker-red.png%7C' .
                                             $description->lat[$i] .
                                             ',' .
                                             $description->lng[$i];
@@ -494,7 +491,7 @@
                                         $description->lat .
                                         ',' .
                                         $description->lng .
-                                        '&zoom=16&size=480x355&maptype=terrain&markers=icon:https://vistamedia.co.id/img/marker-red.png%7C' .
+                                        '&zoom=16&size=480x355&maptype=terrain&markers=icon:https://visualmandiri.co.id/img/marker-red.png%7C' .
                                         $description->lat .
                                         ',' .
                                         $description->lng .
@@ -603,7 +600,7 @@
                                                                 class="w-[100px] text-xs font-mono font-thin text-teal-900 ml-2">Kawasan
                                                             </span>
                                                             <span class="w-[100px] flex mt-[40px] ml-2">
-                                                                {{ QrCode::size(100)->generate('https://vistamedia.co.id/marekting/quotations/preview/' . $quotation_revision->quotation->media_category->name . '/' . $product->id) }}
+                                                                {{ QrCode::size(100)->generate('https://visualmandiri.co.id/marekting/quotations/preview/' . $quotation_revision->quotation->media_category->name . '/' . $product->id) }}
                                                             </span>
                                                         </div>
                                                         <span

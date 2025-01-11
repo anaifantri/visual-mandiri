@@ -107,48 +107,48 @@ class SaleController extends Controller
         }
     }
 
-    public function report(String $category, Request $request): View
-    {
-        if($category == "All"){
-            $dataCategory = MediaCategory::where('id', $request->media_category_id)->get()->last();
-            $sales = Sale::filter(request('search'))->sortable()->category()->paginate(10)->withQueryString();
-            $dataLocations = Location::filter(request('search'))->area()->city()->condition()->category()->sortable()->paginate(10)->withQueryString();
-        }else{
-            $dataCategory = MediaCategory::where('name', $category)->get()->last();
-            $media_category_id = $dataCategory->id;
-            $sales = Sale::where('media_category_id', $dataCategory->id)->filter(request('search'))->sortable()->paginate(10)->withQueryString();
-            $dataLocations = Location::where('media_category_id', $media_category_id)->filter(request('search'))->area()->city()->condition()->sortable()->paginate(10)->withQueryString();
-        }
+    // public function report(String $category, Request $request): View
+    // {
+    //     if($category == "All"){
+    //         $dataCategory = MediaCategory::where('id', $request->media_category_id)->get()->last();
+    //         $sales = Sale::filter(request('search'))->sortable()->category()->paginate(10)->withQueryString();
+    //         $dataLocations = Location::filter(request('search'))->area()->city()->condition()->category()->sortable()->paginate(10)->withQueryString();
+    //     }else{
+    //         $dataCategory = MediaCategory::where('name', $category)->get()->last();
+    //         $media_category_id = $dataCategory->id;
+    //         $sales = Sale::where('media_category_id', $dataCategory->id)->filter(request('search'))->sortable()->paginate(10)->withQueryString();
+    //         $dataLocations = Location::where('media_category_id', $media_category_id)->filter(request('search'))->area()->city()->condition()->sortable()->paginate(10)->withQueryString();
+    //     }
 
-        $media_categories = MediaCategory::with('sales')->get();
-        $areas = Area::with('locations')->get();
-        $cities = City::with('locations')->get();
-        $media_sizes = MediaSize::with('locations')->get();
-        $location_categories = MediaCategory::with('locations')->get();
-        $companies = Company::with('sales')->get();
-        $quotations = Quotation::with('sales')->get();
-        return view ('sales.reports', [
-            'sales'=>$sales,
-            'locations'=>$dataLocations,
-            'categories'=>MediaCategory::all(),
-            'areas'=>Area::all(),
-            'data_category'=>$dataCategory,
-            'category'=>$category,
-            'title' => 'Daftar Penjualan',
-            compact('media_categories', 'companies','quotations', 'location_categories', 'areas', 'cities', 'media_sizes')
-        ]);
-    }
+    //     $media_categories = MediaCategory::with('sales')->get();
+    //     $areas = Area::with('locations')->get();
+    //     $cities = City::with('locations')->get();
+    //     $media_sizes = MediaSize::with('locations')->get();
+    //     $location_categories = MediaCategory::with('locations')->get();
+    //     $companies = Company::with('sales')->get();
+    //     $quotations = Quotation::with('sales')->get();
+    //     return view ('sales.reports', [
+    //         'sales'=>$sales,
+    //         'locations'=>$dataLocations,
+    //         'categories'=>MediaCategory::all(),
+    //         'areas'=>Area::all(),
+    //         'data_category'=>$dataCategory,
+    //         'category'=>$category,
+    //         'title' => 'Daftar Penjualan',
+    //         compact('media_categories', 'companies','quotations', 'location_categories', 'areas', 'cities', 'media_sizes')
+    //     ]);
+    // }
 
-    public function home(String $category, Request $request): View
+    public function home(String $category, String $company_id, Request $request): View
     {
         if(Gate::allows('isSale') && Gate::allows('isMarketingRead')){
             if($category == "All"){
                 $dataCategory = MediaCategory::where('id', $request->media_category_id)->get()->last();
-                $sales = Sale::filter(request('search'))->weekday()->monthly()->annual()->category()->month()->year()->sortable()->paginate(8)->withQueryString();
+                $sales = Sale::where('company_id', $company_id)->filter(request('search'))->weekday()->monthly()->annual()->category()->month()->year()->sortable()->paginate(8)->withQueryString();
             }else{
                 $dataCategory = MediaCategory::where('name', $category)->get()->last();
                 $media_category_id = $dataCategory->id;
-                $sales = Sale::where('media_category_id', $dataCategory->id)->filter(request('search'))->category()->weekday()->monthly()->annual()->month()->year()->sortable()->paginate(8)->withQueryString();
+                $sales = Sale::where('company_id', $company_id)->where('media_category_id', $dataCategory->id)->filter(request('search'))->category()->weekday()->monthly()->annual()->month()->year()->sortable()->paginate(8)->withQueryString();
             }
     
             $media_categories = MediaCategory::with('sales')->get();
@@ -166,7 +166,7 @@ class SaleController extends Controller
         }
     }
 
-    public function selectQuotation(String $category): View
+    public function selectQuotation(String $category, String $company_id): View
     {
         if((Gate::allows('isAdmin') && Gate::allows('isSale') && Gate::allows('isMarketingCreate')) || (Gate::allows('isMarketing') && Gate::allows('isSale') && Gate::allows('isMarketingCreate'))){
             $mediaCategory = MediaCategory::where('name', $category)->firstOrFail();
@@ -174,7 +174,7 @@ class SaleController extends Controller
             $quotation_revisions = QuotationRevision::with('quotation')->get();
             return view ('sales.select-quotation', [
                 'categories'=>MediaCategory::all(),
-                'quotations'=>Quotation::where('media_category_id', $mediaCategory->id)->dealSales()->deal()->filter(request('search'))->sortable()->get(),
+                'quotations'=>Quotation::where('company_id', $company_id)->where('media_category_id', $mediaCategory->id)->dealSales()->deal()->filter(request('search'))->sortable()->get(),
                 'title' => 'Pilih Penawaran',
                 'data_category' => $mediaCategory,
                 compact('media_categories', 'quotation_revisions')
@@ -248,13 +248,14 @@ class SaleController extends Controller
         if((Gate::allows('isAdmin') && Gate::allows('isSale') && Gate::allows('isMarketingCreate')) || (Gate::allows('isMarketing') && Gate::allows('isSale') && Gate::allows('isMarketingCreate'))){
             $sales = json_decode($request->salesData);
             $romawi = [1 => 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VII', 'IX', 'X', 'XI', 'XII'];
+            $dataCompany = Company::where('id', $request->company_id)->firstOrFail();
             $request->validate([
                 'document_po.*'=> 'image|file|mimes:jpeg,png,jpg|max:2048',
                 'document_agreement.*'=> 'image|file|mimes:jpeg,png,jpg|max:2048',
             ]);
             foreach($sales as $sale){
                 // Set number --> start
-                $lastSales = Sale::where('company_id', $sale->company_id)->whereYear('created_at', Carbon::now()->year)->get()->last();
+                $lastSales = Sale::where('company_id', $request->company_id)->whereYear('created_at', Carbon::now()->year)->get()->last();
                 if($lastSales){
                     $lastNumber = (int)substr($lastSales->number,0,4);
                     $newNumber = $lastNumber + 1;
@@ -263,20 +264,20 @@ class SaleController extends Controller
                 }
                 
                 if($newNumber > 0 && $newNumber < 10){
-                    $number = '000'.$newNumber.'/PJ/VM/'.$romawi[(int) date('m')].'-'.date('Y');
+                    $number = '000'.$newNumber.'/PJ/'.$dataCompany->code.'/'.$romawi[(int) date('m')].'-'.date('Y');
                 }else if($newNumber >= 10 && $newNumber < 100 ){
-                    $number = '00'.$newNumber.'/PJ/VM/'.$romawi[(int) date('m')].'-'.date('Y');
+                    $number = '00'.$newNumber.'/PJ/'.$dataCompany->code.'/'.$romawi[(int) date('m')].'-'.date('Y');
                 }else if($newNumber >= 100 && $newNumber < 1000 ){
-                    $number = '0'.$newNumber.'/PJ/VM/'.$romawi[(int) date('m')].'-'.date('Y');
+                    $number = '0'.$newNumber.'/PJ/'.$dataCompany->code.'/'.$romawi[(int) date('m')].'-'.date('Y');
                 } else {
-                    $number = $newNumber.'/PJ/VM/'.$romawi[(int) date('m')].'-'.date('Y');
+                    $number = $newNumber.'/PJ/'.$dataCompany->code.'/'.$romawi[(int) date('m')].'-'.date('Y');
                 }
                 // Set number --> end
                 
                 $validateData['number'] = $number;
                 $validateData['quotation_id'] = $sale->quotation_id;
                 $validateData['location_id'] = $sale->location_id;
-                $validateData['company_id'] = $sale->company_id;
+                $validateData['company_id'] = $request->company_id;
                 $validateData['media_category_id'] = $sale->media_category_id;
                 $validateData['product'] = json_encode($sale->product);
                 if($sale->dpp){

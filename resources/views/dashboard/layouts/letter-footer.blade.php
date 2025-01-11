@@ -7,13 +7,14 @@
             <span class="text-sm font-semibold">{{ $company->name }}</span>
         </div>
         <div class="flex items-center w-full justify-center">
-            <span class="text-xs">{{ $company->address }}</span>
+            <span class="text-xs">{{ $company->address }}, {{ $company->village }}, {{ $company->district }},
+                {{ $company->city }} | {{ $company->province }} {{ $company->post_code }}</span>
         </div>
         <div class="flex items-center w-full justify-center">
             <span class="text-xs">Ph. {{ $company->phone }} | Mobile. {{ $company->m_phone }} </span>
         </div>
         <div class="flex items-center w-full justify-center">
-            <span class="text-xs">e-mail : {{ $company->email }} | {{ $company->website }}</span>
+            <span class="text-xs">e-mail : {{ $company->email }} | Website : {{ $company->website }}</span>
         </div>
     </div>
 </div>
