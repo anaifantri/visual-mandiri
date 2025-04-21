@@ -5,6 +5,7 @@
     @php
         $ppnTotal = 0;
         $pphTotal = 0;
+        $priceTotal = 0;
         $bulan = [
             1 => 'Januari',
             'Februari',
@@ -67,7 +68,7 @@
                                 <div class="flex w-full justify-end">
                                     <div>
                                         <div class="flex justify-center w-56">
-                                            <label class="text-5xl text-center">C2</label>
+                                            <label class="text-5xl text-center">C1</label>
                                         </div>
                                         <div class="flex justify-center w-56">
                                             <label class="text-sm text-center">LAPORAN PENJUALAN</label>
@@ -152,7 +153,7 @@
                 </div>
             </div>
         </div>
-        <input id="saveName" type="text" value="Laporan C2 - {{ date('d-m-Y') }}" hidden>
+        <input id="saveName" type="text" value="Laporan C1 - {{ date('d-m-Y') }}" hidden>
     </div>
 
 
