@@ -26,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         View::share('default_vat', 11);
         View::share('categories', MediaCategory::all());
-        View::share('company', Company::where('id', '=' , 1)->firstOrFail());
+        View::share('company', Company::where('id', '=' , 3)->firstOrFail());
     }
 }
