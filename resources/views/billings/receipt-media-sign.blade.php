@@ -9,8 +9,8 @@
                 <label class="flex text-sm"><u>Catatan :</u></label>
                 <label class="flex text-sm ml-2">1. Mohon pembayaran ditransfer ke rekening bank berikut :</label>
                 <label class="flex text-sm ml-6 font-semibold">Bank BCA Cabang Hasanudin</label>
-                <label class="flex text-sm ml-6 font-semibold">No. Rekening : 040 232 1111</label>
-                <label class="flex text-sm ml-6 font-semibold">Atas Nama : Vista Media PT</label>
+                <label class="flex text-sm ml-6 font-semibold">No. Rekening : 040 420 0000</label>
+                <label class="flex text-sm ml-6 font-semibold">Atas Nama : VISUAL MANDIRI CV</label>
                 <label class="flex text-sm ml-2">2. Pembayaran melalui cek/giro dengan mencantumkan nama
                     penerima</label>
                 <label class="flex text-sm ml-6">dan baru dianggap sah setelah cek/giro dapat
