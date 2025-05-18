@@ -230,17 +230,17 @@
                             <div class="flex">
                                 <label class="w-20">No. Rek.</label>
                                 <label>:</label>
-                                <label class="ml-2 font-semibold">040 420 0000</label>
+                                <label class="ml-2 font-semibold">{{ $bank_account->number }}</label>
                             </div>
                             <div class="flex">
                                 <label class="w-20">Nama</label>
                                 <label>:</label>
-                                <label class="ml-2 font-semibold">VISUAL MANDIRI CV</label>
+                                <label class="ml-2 font-semibold">{{ $bank_account->name }}</label>
                             </div>
                             <div class="flex">
                                 <label class="w-20">Bank</label>
                                 <label>:</label>
-                                <label class="ml-2 font-semibold">BCA Cabang Hasanudin, Denpasar - Bali</label>
+                                <label class="ml-2 font-semibold">{{ $bank_account->bank }}</label>
                             </div>
                         </td>
                         <td class="border text-right px-2 font-semibold">SUB TOTAL</td>
