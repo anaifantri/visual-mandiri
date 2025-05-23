@@ -1072,6 +1072,10 @@ video {
   height: 250px;
 }
 
+.h-\[25px\] {
+  height: 25px;
+}
+
 .h-\[260px\] {
   height: 260px;
 }
@@ -1202,6 +1206,10 @@ video {
 
 .h-\[625px\] {
   height: 625px;
+}
+
+.h-\[680px\] {
+  height: 680px;
 }
 
 .h-\[72px\] {
