@@ -29,10 +29,10 @@
                             <label class="text-lg text-stone-800 font-bold">Laporan Penjualan</label>
                         </div>
                         <div class="grid grid-cols-1 gap-2 w-[500px] p-2">
-                            <a href="/marketing/sales-report/c-report/{{ $company->id }}"
+                            <a href="/marketing/sales-report/c-report/{{ $company->id }}?month={{ (int) date('m') }}&year={{ date('Y') }}"
                                 class="flex justify-center text-teal-400 items-center h-[60px] bg-stone-900 hover:bg-stone-700 border rounded-lg shadow-lg cursor-pointer">
                                 <div>
-                                    <label class="flex justify-center font-serif text-4xl cursor-pointer">C2</label>
+                                    <label class="flex justify-center font-serif text-4xl cursor-pointer">C1</label>
                                 </div>
                             </a>
                         </div>
