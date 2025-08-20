@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $bank_account = new stdClass();
         $bank_account->number = '040 420 0000';
         $bank_account->name = 'VISUAL MANDIRI CV';
+        $bank_account->director = 'Texun Sandy Kamboy';
         $bank_account->bank = 'BCA Cabang Hasanudin, Denpasar - Bali';
         View::share('bank_account', $bank_account);
         View::share('categories', MediaCategory::all());
