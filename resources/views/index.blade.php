@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {{-- @vite('resources/css/app.css') --}}
-    <title>VISTA MEDIA | {{ $title }}</title>
+    <title>VISUAL MANDIRI | {{ $title }}</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
@@ -69,8 +69,7 @@
         <div class="p-10 position-absolute m-auto">
             <div
                 class="border border-transparent flex position-relative mb-5 mx-auto border-white border-opacity-50 rounded-full shadow shadow-white bg-white bg-opacity-20 w-32 h-32 md:w-40 lg:w-40 md:h-40 lg:h-40">
-                <img class="w-24 md:w-32 lg:w-32 m-auto position-absolute" src="/img/visual-mandiri.png"
-                    alt="">
+                <img class="w-24 md:w-32 lg:w-32 m-auto position-absolute" src="/img/visual-mandiri.png" alt="">
             </div>
             @auth
                 <h1
